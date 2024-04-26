@@ -1,7 +1,5 @@
 # Turinix_Employee_Scheduling
 
-# Turinix Employee Scheduling API
-
 This project is an API for managing employee schedules in a retail store chain. It provides endpoints for employee management, shift management, and employee scheduling.
 
 ## Features
