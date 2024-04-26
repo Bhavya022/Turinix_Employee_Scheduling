@@ -81,3 +81,6 @@ Copy code
 ## Contributing
 
 Contributions are welcome! Please create a pull request for any improvements or features you'd like to add.
+
+## Deployed Link
+https://turinix-employee-scheduling.onrender.com/
