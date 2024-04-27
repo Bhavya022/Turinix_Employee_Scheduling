@@ -19,6 +19,19 @@ This project is an API for managing employee schedules in a retail store chain. 
   - Optimize staffing based on predicted customer demand.
   - Generate alerts for potential scheduling conflicts.
 
+- **User Routes Logger**:
+  - Middleware function logs information about incoming requests to user endpoints.
+  - Provides insights into user activity and API usage.
+  - Helps track user interactions and debug potential issues.
+
+- **Employee Management**:
+  - Create, retrieve, update, and delete employees.
+  - Define recurring availability patterns for employees.
+  
+...
+
+
+
 ## Technologies Used
 
 - Node.js

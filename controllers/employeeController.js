@@ -1,4 +1,5 @@
 const Employee = require('../models/employeeModel');
+
 exports.createEmployee = async (req, res) => {
   try {
     const { name, department, role, availability } = req.body;
@@ -10,6 +11,7 @@ exports.createEmployee = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 exports.getAllEmployees = async (req, res) => {
   try {
     const employees = await Employee.find();
@@ -19,6 +21,7 @@ exports.getAllEmployees = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 exports.getEmployeeById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -32,11 +35,16 @@ exports.getEmployeeById = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 exports.updateEmployeeById = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, department, role, availability } = req.body;
-    const updatedEmployee = await Employee.findByIdAndUpdate(id, { name, department, role, availability }, { new: true });
+    const updatedEmployee = await Employee.findByIdAndUpdate(
+      id,
+      { name, department, role, availability },
+      { new: true, runValidators: true } // Add runValidators option to validate updated data
+    );
     if (!updatedEmployee) {
       return res.status(404).json({ error: 'Employee not found' });
     }
@@ -46,6 +54,7 @@ exports.updateEmployeeById = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 exports.deleteEmployeeById = async (req, res) => {
   try {
     const { id } = req.params;

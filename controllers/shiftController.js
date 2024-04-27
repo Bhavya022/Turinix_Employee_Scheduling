@@ -1,4 +1,5 @@
 const Shift = require('../models/shiftModel');
+
 exports.createShift = async (req, res) => {
   try {
     const { startTime, endTime, department, requiredSkills } = req.body;
@@ -10,6 +11,7 @@ exports.createShift = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 exports.getAllShifts = async (req, res) => {
   try {
     const shifts = await Shift.find();
@@ -19,6 +21,7 @@ exports.getAllShifts = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 exports.getShiftById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -32,11 +35,16 @@ exports.getShiftById = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 exports.updateShiftById = async (req, res) => {
   try {
     const { id } = req.params;
     const { startTime, endTime, department, requiredSkills } = req.body;
-    const updatedShift = await Shift.findByIdAndUpdate(id, { startTime, endTime, department, requiredSkills }, { new: true });
+    const updatedShift = await Shift.findByIdAndUpdate(
+      id,
+      { startTime, endTime, department, requiredSkills },
+      { new: true, runValidators: true } // Add runValidators option to validate updated data
+    );
     if (!updatedShift) {
       return res.status(404).json({ error: 'Shift not found' });
     }
@@ -46,6 +54,7 @@ exports.updateShiftById = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 exports.deleteShiftById = async (req, res) => {
   try {
     const { id } = req.params;
