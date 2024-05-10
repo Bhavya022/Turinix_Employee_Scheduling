@@ -8,7 +8,4 @@ router.post('/register', authController.register);
 // Login route
 router.post('/login', authController.login);
 
-// Verify token middleware
-router.use(authController.verifyToken);
-
 module.exports = router;

@@ -5,6 +5,13 @@ const User = require('../models/User');
 exports.register = async (req, res) => {
   try {
     const { username, password, role } = req.body;
+    
+    // Check if the username already exists in the database
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Username already exists. Please log in instead.' });
+    }
+    
     const hashedPassword = await bcrypt.hash(password, 10);
     const user = new User({ username, password: hashedPassword, role });
     await user.save();
@@ -14,6 +21,7 @@ exports.register = async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 };
+
 
 exports.login = async (req, res) => {
   try {
